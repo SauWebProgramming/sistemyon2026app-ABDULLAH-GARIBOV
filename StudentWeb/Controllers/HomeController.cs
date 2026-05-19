@@ -1,24 +1,23 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using StudentWeb.Models;
+using System.Text.Json;
 
-namespace StudentWeb.Controllers;
-
-public class HomeController : Controller
+namespace StudentWeb.Controllers
 {
-    public IActionResult Index()
+    public class HomeController : Controller
     {
-        return View();
-    }
+        public async Task<IActionResult> Index()
+        {
+            using var client = new HttpClient();
 
-    public IActionResult Privacy()
-    {
-        return View();
-    }
+            // API'den veriyi çekiyoruz
+            var response = await client.GetAsync("https://localhost:7268/api/student");
+            var jsonString = await response.Content.ReadAsStringAsync();
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            // Gelen JSON'u çözümleyip View'a (Görünüme) gönderiyoruz
+            var studentData = JsonSerializer.Deserialize<JsonElement>(jsonString);
+            ViewBag.Student = studentData;
+
+            return View();
+        }
     }
 }
