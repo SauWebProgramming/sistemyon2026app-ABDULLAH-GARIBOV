@@ -1,0 +1,15 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: studentweb-ingress
+  namespace: abdullah-garibov
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`abdullah.bulut.internal`)
+      kind: Rule
+      services:
+        - name: studentweb-service
+          port: 8080
+  tls: {}

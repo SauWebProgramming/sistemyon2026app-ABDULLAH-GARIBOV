@@ -1,0 +1,25 @@
+name: Build & Deploy ASP.NET App
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  pipeline:
+    uses: saucloudlab/5-devops-experience/.github/workflows/ci-cd-reusable.yml@main
+    secrets: inherit
+    with:
+      app-name: sistemyon2026app-abdullah-garibov
+      app-directory: ./app/StudentWeb
+      namespace: abdullah-garibov
+      deployment-name: studentweb
+      container-name: studentweb
+      image-name: studentweb
+      dockerfile-path: Dockerfile
+      k8s-manifests-path: k8s/
+      run-tests: false

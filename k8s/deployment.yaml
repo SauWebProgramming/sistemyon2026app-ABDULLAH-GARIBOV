@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: studentapi
+  namespace: abdullah-garibov
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: studentapi
+  template:
+    metadata:
+      labels:
+        app: studentapi
+    spec:
+      containers:
+        - name: studentapi
+          image: ghcr.io/sauwebprogramming/sistemyon2026app-abdullah-garibov-api:latest
+          ports:
+            - containerPort: 8080
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: studentweb
+  namespace: abdullah-garibov
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: studentweb
+  template:
+    metadata:
+      labels:
+        app: studentweb
+    spec:
+      containers:
+        - name: studentweb
+          image: ghcr.io/sauwebprogramming/sistemyon2026app-abdullah-garibov-web:latest
+          ports:
+            - containerPort: 8080

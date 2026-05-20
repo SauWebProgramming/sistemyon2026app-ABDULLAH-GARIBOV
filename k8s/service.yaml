@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: studentapi
+  namespace: abdullah-garibov
+spec:
+  selector:
+    app: studentapi
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: studentweb-service
+  namespace: abdullah-garibov
+spec:
+  selector:
+    app: studentweb
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
