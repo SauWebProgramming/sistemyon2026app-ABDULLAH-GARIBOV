@@ -12,6 +12,8 @@ spec:
       labels:
         app: studentapi
     spec:
+      imagePullSecrets:
+      - name: ghcr-secret
       containers:
       - name: studentapi
         image: ghcr.io/sauwebprogramming/sistemyon2026app-abdullah-garibov-api:latest

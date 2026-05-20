@@ -10,7 +10,7 @@ namespace StudentWeb.Controllers
             using var client = new HttpClient();
 
             // API'den veriyi çekiyoruz
-            var response = await client.GetAsync("https://localhost:7268/api/student");
+            var response = await client.GetAsync("http://studentapi:8080/api/student");
             var jsonString = await response.Content.ReadAsStringAsync();
 
             // Gelen JSON'u çözümleyip View'a (Görünüme) gönderiyoruz
